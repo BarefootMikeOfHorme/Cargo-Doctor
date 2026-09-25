@@ -1,0 +1,63 @@
+===============================================================================
+CARGO DOCTOR COMMAND, SUBCOMMAND & FLAG REGISTRY
+===============================================================================
+
+[PRIMARY SUBCOMMANDS & MODES]
+cargo-doctor                         : Quick delta diagnostic scan on changed/staged files.
+cargo-doctor init                    : Initializes .cargo-doctor/ workspace configuration & baseline blueprint.
+cargo-doctor scan                    : Triggers manual analysis run.
+  ├── --light                        : Fast incremental scan leveraging cache blueprint and file hashes.
+  └── --heavy / --force              : Deep pass; rebuilds full blueprint, AST graph & wiring map.
+cargo-doctor watch                   : Continuous file-polling daemon triggering auto-analysis on save.
+cargo-doctor validate                : Validates workspace integrity, system path tools, outputs MD audit report.
+cargo-doctor fix                     : Executes automated AST/Clippy code repairs, formatting, and quick-fixes.
+cargo-doctor audit                   : Scans crate graph for known security advisories, CVEs, and bans.
+cargo-doctor resolve                 : Detects missing OS linkers/system C-deps and triggers native installer.
+cargo-doctor clean                   : Purges .cargo-doctor/ cache, temporary builds, and execution buffers.
+
+[IDE, EDITOR & PROJECT FILE DISCOVERY]
+cargo-doctor validate --ide          : Audits IDE config files (.vscode/settings.json, .idea/, rust-analyzer.toml).
+cargo-doctor scan --project-files    : Scans non-standard files (build.rs, embedded manifests, PyO3 bindings).
+cargo-doctor --lsp / lsp             : Verifies rust-analyzer / Language Server Protocol workspace indexing & hooks.
+cargo-doctor --workspace-map         : Rebuilds member crate dependency paths for IDE project tree navigation.
+cargo-doctor --ignore-unrecognized   : Bypasses non-Rust/non-cargo files during diagnostic workspace indexing.
+
+[ENVIRONMENT, TOOLCHAIN & BINDING FLAGS]
+cargo-doctor --requirements          : Validates Python 3.12 / PyO3 interface contracts & syncs manifests.
+cargo-doctor --pyo3                  : Validates Rust-to-Python C-API bindings, ABI compatibility, and .so/.pyd objects.
+cargo-doctor --udeps                 : Scans Cargo.toml for unused or orphaned crate dependencies.
+cargo-doctor --system-deps           : Checks native toolchain dependencies (gcc, clang, cmake, pkg-config).
+
+[PROFILE & TARGETING FLAGS]
+cargo-doctor dev                     : Executes pipeline under unoptimized development profile.
+cargo-doctor release / --release     : Executes pipeline under release profile with full LTO checks.
+cargo-doctor <path/to/file.rs>       : Isolates diagnostics and Clippy lints to a single file path.
+cargo-doctor --package <pkg> / -p    : Isolates diagnostic analysis to a specific workspace member crate.
+cargo-doctor --lib                   : Restricts diagnostic pass solely to library targets.
+cargo-doctor --bin <name>            : Restricts diagnostic pass solely to specified binary targets.
+cargo-doctor --tests                 : Includes integration/unit test targets in Clippy diagnostic matrix.
+cargo-doctor --benches               : Includes performance benchmark targets in analysis pass.
+cargo-doctor --all / --workspace     : Expands analysis across all workspace members simultaneously.
+cargo-doctor --all-features          : Enables all crate feature flags during compilation pass.
+cargo-doctor --no-default-features   : Disables default features to verify minimal target compatibility.
+cargo-doctor --features <list>       : Space/comma-separated list of features to activate.
+
+[ISOLATION, RUNTIME & OUTPUT FLAGS]
+cargo-doctor --sandbox               : Runs process in isolated ephemeral buffer inside .cargo-doctor/tmp/.
+cargo-doctor --popout                : Detaches process and spawns dedicated terminal window (wt/x-terminal).
+cargo-doctor --report <path>         : Exports full diagnostic analysis to specified Markdown/HTML file.
+cargo-doctor --json                  : Outputs raw machine-readable JSON logs for CI/CD integration.
+cargo-doctor --dry-run               : Simulates fix/resolution actions without modifying files or installing deps.
+cargo-doctor --verbose / -v          : Enables detailed debug logging and raw compiler command tracing.
+cargo-doctor --quiet / -q            : Suppresses standard status outputs, emitting only errors.
+cargo-doctor --help / -h             : Prints command-line interface usage guide and available options.
+
+[SHORTCUT & SHELL ALIAS PROXIES]
+cdoctor [args]                       : Primary alias proxy for standard build passes, scans, and flags.
+cdinitial                            : Alias proxy for `cargo-doctor init`.
+cdsetuprerun                         : Alias proxy for `cargo-doctor scan --heavy --force`.
+cdvalidate                           : Alias proxy for `cargo-doctor validate`.
+cdreqs                               : Alias proxy for `cargo-doctor --requirements`.
+cdwatch                              : Alias proxy for `cargo-doctor watch`.
+cdsandbox                            : Alias proxy for `cargo-doctor --sandbox`.
+cargo-doc [args]                     : Legacy alias proxy for general environment diagnostics.

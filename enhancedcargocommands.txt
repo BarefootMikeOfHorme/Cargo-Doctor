@@ -1,0 +1,187 @@
+===============================================================================
+NATIVE CARGO & ECOSYSTEM SUBCOMMANDS WITH ALL -- FLAGS
+===============================================================================
+
+[BUILD & COMPILATION]
+cargo build
+  ├── --release                      : Build optimized artifacts with release profile.
+  ├── --target <triple>              : Target architecture (e.g., x86_64-unknown-linux-gnu).
+  ├── --workspace / --all            : Build all packages in the workspace.
+  ├── --package <pkg> / -p           : Package to build.
+  ├── --jobs <N> / -j                : Number of parallel compiler jobs.
+  ├── --features <feats>             : Space or comma-separated list of features to activate.
+  ├── --all-features                 : Activate all available features.
+  └── --no-default-features          : Do not activate the `default` feature.
+
+cargo check
+  ├── --all-targets                  : Check binaries, tests, benchmarks, and examples.
+  ├── --workspace / --all            : Check all packages in the workspace.
+  ├── --tests                        : Check test targets.
+  ├── --benches                      : Check benchmark targets.
+  └── --message-format <fmt>         : Output representation (human, json, json-diagnostic-short).
+
+cargo clean
+  ├── --release                      : Clean artifacts built in release profile.
+  ├── --package <pkg> / -p           : Package artifacts to clean.
+  ├── --target <triple>              : Target triple to clean.
+  └── --doc                          : Clean documentation directory.
+
+cargo rustc
+  ├── --release                      : Build in release mode.
+  └── -- <rustc-flags>               : Pass raw flags directly to rustc (e.g., -- -C opt-level=3).
+
+cargo rustdoc
+  ├── --open                         : Open docs in browser after building.
+  ├── --no-deps                      : Don't build documentation for dependencies.
+  └── -- <rustdoc-flags>             : Pass raw flags directly to rustdoc.
+
+[TESTING, BENCHMARKING & COVERAGE]
+cargo test
+  ├── --no-fail-fast                 : Run all tests regardless of failure count.
+  ├── --workspace                    : Test all packages in workspace.
+  ├── --doc                          : Run only documentation tests.
+  ├── --test <name>                  : Run specific integration test target.
+  └── -- <runner-flags>              : Pass flags to binary (e.g., -- --nocapture, -- --ignored).
+
+cargo bench
+  ├── --workspace                    : Benchmark all workspace members.
+  ├── --bench <name>                 : Run specific benchmark target.
+  └── -- <runner-flags>              : Pass flags to benchmark engine (e.g., -- --save-baseline <name>).
+
+cargo nextest run (requires cargo-nextest)
+  ├── --workspace                    : Run tests across workspace.
+  ├── --no-fail-fast                 : Do not cancel execution on first failure.
+  ├── --partition <M/N>              : Partition test execution across CI nodes.
+  └── --retries <N>                  : Retry failed tests N times before failing.
+
+cargo llvm-cov (requires cargo-llvm-cov)
+  ├── --html                         : Output HTML report.
+  ├── --lcov --output-path <file>    : Output LCOV file for CI.
+  ├── --open                         : Open HTML report in browser.
+  └── --workspace                    : Run coverage across workspace.
+
+cargo tarpaulin (requires cargo-tarpaulin)
+  ├── --out <fmt>                    : Output format (Html, Xml, Json, Lcov).
+  ├── --ignore-tests                 : Ignore test code coverage.
+  └── --workspace                    : Analyze entire workspace.
+
+[LINTING, QUALITY, SECURITY & METRICS]
+cargo clippy
+  ├── --fix                          : Automatically apply lint suggestions.
+  ├── --allow-dirty                  : Allow fix on dirty working trees.
+  ├── --allow-staged                 : Allow fix on staged working trees.
+  ├── --all-targets                  : Run lints on tests, benches, and examples.
+  └── -- <clippy-flags>              : Pass flags to clippy (e.g., -- -D warnings, -A clippy::too_many_arguments).
+
+cargo fmt
+  ├── --check                        : Return error code if unformatted (does not modify files).
+  ├── --all                          : Format all packages in workspace.
+  └── -- <fmt-flags>                 : Pass options directly to rustfmt.
+
+cargo audit (requires cargo-audit)
+  ├── --deny <warnings|unmaintained> : Set failure conditions.
+  ├── --ignore <ID>                  : Ignore specific vulnerability ID.
+  └── --fix                          : Attempt to dry-run update vulnerable dependencies.
+
+cargo deny check (requires cargo-deny)
+  ├── advisories                     : Check vulnerability database.
+  ├── licenses                       : Verify dependency license compliance.
+  ├── bans                           : Enforce prohibited crate bans.
+  └── sources                        : Validate allowed crate sources/registries.
+
+cargo semver-checks (requires cargo-semver-checks)
+  ├── --package <pkg>                : Package to inspect for breaking API changes.
+  └── --baseline-rev <git-ref>       : Git reference/tag to compare public API against.
+
+[DEPENDENCY & PACKAGE MANAGEMENT]
+cargo add <crate>
+  ├── --dev                          : Add as dev-dependency.
+  ├── --build                        : Add as build-dependency.
+  ├── --optional                     : Mark dependency as optional feature.
+  ├── --features <list>              : Enable specific default features on added crate.
+  └── --rename <name>                : Rename crate binding inside Cargo.toml.
+
+cargo remove <crate>
+  ├── --dev                          : Remove from dev-dependencies.
+  └── --build                        : Remove from build-dependencies.
+
+cargo update
+  ├── --package <pkg> / -p           : Update specific package only.
+  ├── --dry-run                      : Display changes without modifying Cargo.lock.
+  └── --aggressive                   : Force update of all sub-dependencies.
+
+cargo tree
+  ├── --duplicates / -d              : Print only duplicated dependencies.
+  ├── --invert / -i                  : Invert tree direction to show dependency dependents.
+  ├── --edges <kinds>                : Filter edges (normal, build, dev, features).
+  └── --target <triple>              : Show tree for specific target architecture.
+
+cargo vendor <path>
+  └── --versioned-dirs               : Include version numbers in directory paths.
+
+cargo fetch
+  └── --target <triple>              : Fetch dependencies for specified target.
+
+cargo outdated (requires cargo-outdated)
+  ├── --root-deps-only               : Only check direct dependencies listed in Cargo.toml.
+  └── --depth <N>                    : Set maximum dependency depth.
+
+cargo udeps (requires cargo-udeps + nightly)
+  ├── --all-targets                  : Scan tests and examples for unused crates.
+  └── --backend cargo                : Set dependency resolution engine.
+
+[CODE ANALYSIS, REFLECTION & DISCOVERY]
+cargo expand (requires cargo-expand + nightly)
+  ├── --test <name>                  : Expand specific integration test.
+  ├── --bin <name>                   : Expand specific binary target.
+  └── <path::to::module>             : Restrict expansion to a specific module path.
+
+cargo bloat (requires cargo-bloat)
+  ├── --release                      : Analyze release binary.
+  ├── --crates                       : Group binary size contribution by crate.
+  └── --time                         : Measure compile time per crate instead of size.
+
+cargo asm (requires cargo-show-asm)
+  ├── --asm                          : Print native Assembly output.
+  ├── --llvm                         : Print LLVM-IR intermediate representation.
+  ├── --mir                          : Print Rust Mid-level Intermediate Representation.
+  └── --wasm                         : Print WebAssembly text format.
+
+cargo modules (requires cargo-modules)
+  ├── structure                      : Render module tree graph.
+  └── dependencies                   : Render inter-module dependency relationships.
+
+[TASKS, TEMPLATES & WATCHERS]
+cargo watch (requires cargo-watch)
+  ├── -x <command>                   : Execute command on file change (e.g., -x check -x "test --lib").
+  ├── -c                             : Clear terminal screen before each run.
+  └── -w <dir>                       : Specify directory paths to monitor for changes.
+
+cargo generate (requires cargo-generate)
+  ├── --git <url>                    : Git repository URL containing template.
+  ├── --name <name>                  : Set new project name.
+  └── --branch <branch>              : Git branch to use for template scaffolding.
+
+cargo zigbuild (requires cargo-zigbuild)
+  ├── --target <triple>              : Cross-compile target using Zig as C linker.
+  └── --release                      : Compile with release optimizations.
+
+[WORKSPACE SETUP & CRATES.IO INTERACTION]
+cargo new <path>
+  ├── --bin                          : Scaffold binary application (default).
+  ├── --lib                          : Scaffold library crate.
+  └── --vcs <git|none>               : Initialize version control repository.
+
+cargo init
+  ├── --bin                          : Initialize binary application in CWD.
+  └── --lib                          : Initialize library crate in CWD.
+
+cargo doc
+  ├── --open                         : Automatically open generated HTML in default browser.
+  ├── --no-deps                      : Exclude documentation of dependency crates.
+  └── --document-private-items       : Include non-public modules and functions in output.
+
+cargo publish
+  ├── --dry-run                      : Perform validation checks without uploading to crates.io.
+  ├── --allow-dirty                  : Allow publishing with uncommitted git changes.
+  └── --token <token>                : Provide API token for authentication.

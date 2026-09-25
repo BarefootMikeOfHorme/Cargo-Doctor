@@ -1,0 +1,70 @@
+===============================================================================
+NATIVE CARGO & ECOSYSTEM SUBCOMMANDS (SHORT-FORM REFERENCE)
+===============================================================================
+
+[BUILD & COMPILATION]
+cargo build                          : Compile local package and its dependencies.
+cargo check                          : Fast compile check for syntax/type errors without emitting binaries.
+cargo run                            : Build and execute binary target.
+cargo clean                          : Delete target directory artifacts and build caches.
+cargo rustc                          : Compile package passing flags directly to rustc compiler.
+cargo rustdoc                        : Generate HTML documentation passing flags to rustdoc.
+
+[TESTING, BENCHMARKING & COVERAGE]
+cargo test                           : Run unit, integration, and doc tests.
+cargo bench                          : Execute performance benchmarks in benches/.
+cargo nextest run                    : Fast, parallelized next-generation test runner (cargo-nextest).
+cargo llvm-cov                       : Generate LLVM source-based code coverage reports.
+cargo tarpaulin                      : Line coverage reporting tool designed for Rust projects.
+cargo criterion                      : Run benchmark suites managed by Criterion.rs.
+
+[LINTING, QUALITY, SECURITY & METRICS]
+cargo clippy                         : Idiomatic Rust linter to catch common bugs and performance flaws.
+cargo fmt                            : Format source files according to rustfmt guidelines.
+cargo audit                          : Check Cargo.lock against RustSec Advisory Database.
+cargo deny check                     : Enforce policy checks on crate licenses, bans, and advisories.
+cargo geiger                         : Detect and measure usage of unsafe Rust code in crate graph.
+cargo semver-checks                  : Verify Semantic Versioning compatibility against previous releases.
+cargo spellcheck                     : Check spelling in documentation comments.
+
+[DEPENDENCY & PACKAGE MANAGEMENT]
+cargo add <crate>                    : Add new crate dependency directly to Cargo.toml.
+cargo remove <crate>                 : Remove specified dependency from Cargo.toml.
+cargo update                         : Update dependencies listed in Cargo.lock to latest compatible versions.
+cargo tree                           : Display visual tree of workspace dependency graph.
+cargo vendor                         : Download dependencies into local vendor directory for offline builds.
+cargo fetch                          : Pre-fetch crate dependencies to local cargo cache.
+cargo outdated                       : Query crates.io to display out-of-date dependency versions.
+cargo udeps                          : Detect unused or redundant dependencies in Cargo.toml.
+cargo machete                        : Fast detection and removal of unused dependencies.
+cargo binstall                       : Install binary releases of Cargo subcommands without compiling.
+cargo install-update -a              : Batch update all installed third-party Cargo subcommands.
+
+[CODE ANALYSIS, REFLECTION & DISCOVERY]
+cargo expand                         : Output rustc macro-expanded code and derive attribute output.
+cargo bloat                          : Analyze binary executable to find what occupies target space.
+cargo asm                            : Print generated Assembly, LLVM-IR, MIR, or WASM for Rust functions.
+cargo modules                        : Render tree-like visual overview of crate module structure.
+cargo about                          : Generate legal attribution file listing licenses of all dependencies.
+cargo chef                           : Prepare and cache Docker build layers for Rust projects.
+
+[TASKS, TEMPLATES, PACKAGING & DEPLOYMENT]
+cargo watch                          : Monitor file changes and automatically execute specified cargo tasks.
+cargo make                           : Cross-platform task runner and build automation tool.
+cargo wizard                         : Interactively configure Cargo profiles for speed, size, or debug.
+cargo generate                       : Scaffold new Rust project from existing Git repository template.
+cargo release                        : Automate release lifecycle (tagging, version bumping, publishing).
+cargo clone <crate>                  : Fetch source code of any published crate from crates.io.
+cargo component                      : Build WebAssembly components following the Component Model.
+cargo zigbuild                       : Cross-compile Rust binaries using Zig as C/C++ toolchain linker.
+cargo deb / cargo wix                : Package application into standard Debian (.deb) or Windows (.msi) installers.
+
+[WORKSPACE SETUP & CRATES.IO INTERACTION]
+cargo new <path>                     : Scaffold new Rust binary or library package in new directory.
+cargo init                           : Initialize Rust workspace inside existing directory.
+cargo doc --open                     : Build workspace documentation and open in web browser.
+cargo publish                        : Package and upload local crate to crates.io.
+cargo login <token>                  : Save API authentication token for crates.io.
+cargo search <term>                  : Search crates.io index for published packages.
+cargo yank --vers <v>                : Mark specific crate version on crates.io as yanked.
+cargo install <crate>                : Download, compile, and install executable binary to PATH.

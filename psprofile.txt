@@ -1,0 +1,16 @@
+# Cargo-Doctor Global Shortcut Proxy
+$GLOBAL_CARGO_DOCTOR = "C:\path\to\cargo-doctor.py"
+
+function cdoctor { python $GLOBAL_CARGO_DOCTOR $args }
+function cdinitial { python $GLOBAL_CARGO_DOCTOR --init $args }
+function cdsetuprerun { python $GLOBAL_CARGO_DOCTOR --scan --heavy $args }
+function cdvalidate { python $GLOBAL_CARGO_DOCTOR --validate $args }
+function cdreqs { python $GLOBAL_CARGO_DOCTOR --requirements $args }
+
+# Directory Enter Hook: Auto-sources local project aliases if present
+function cd {
+    builtin cd $args
+    if (Test-Path ".\.cargo-doctor\aliases\cargo_doctor_aliases.ps1") {
+        . ".\.cargo-doctor\aliases\cargo_doctor_aliases.ps1"
+    }
+}
